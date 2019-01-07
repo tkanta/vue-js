@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue Js</title>
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="vue.js"></script>  
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-on:input="changeTitle">
+        <p v-once>{{title}}</p>
+        <p>{{getTitle()}}</p>
+        <a v-html="completeLink">Google</a>
+        <hr>
+        <!-- DOM events -->
+        <input type="button" v-on:click="increaseCount(2)" value="Increament">
+        <input type="button" v-on:click="count++" value="Increament">
+        <p>count : {{count * 2 > 10 ? "Greater than 10" : "smalled than 10" }}</p>
+        <a v-bind:href="getLink()">Google</a>
+        <p v-on:mousemove="updateCoordinate($event)">Coordinates : {{X}} / {{Y}} - <span v-on:mousemove.stop="">BLACK HOLE</span></p>
+        <!--<p v-once>v-once : {{title}}</p>
+        <p>{{title}}</p>
+        <p>{{getTitle()}}</p>
+        <p>Initial Title : {{getTitle()}} <a v-bind:href="link">Google</a></p>
+        <a v-bind:href="getLink()">Google</a>-->
+        
+        <!-- Listenting to Keyboard event -->
+        <input type="text" v-on:keyup.enter.space="alertText($event)" />
+         
+        <!-- variable assignment -->
+        <hr/>
+        <input type="text" v-on:keydown.enter="value = $event.target.value"/>
+        <p>value : {{value}}</p>
+
+        <!-- Two way binding -->
+        <hr>
+        <input type="text" v-model="name">
+        <p>User Name : {{name}}</p>
+
+        <!-- computed method -->
+        <hr>
+        <button v-on:click="computedCounter++">computed</button>
+        <button v-on:click="nonComputed()">nonComputed</button>
+        <p>{{computedResult}} | {{nonComputedCounter}}</p>
+    </div>   
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                title: 'Hello World !!',
+                link: 'http://google.com',
+                completeLink: '<a href="http://google.com">Google link</a>',
+                count: 0,
+                X: 0,
+                Y: 0,
+                value: "",
+                name: "tarini",
+                computedCounter: "",
+                nonComputedCounter: 0
+            },
+
+            computed: {
+                computedResult : function(){
+                    console.log("Computed");
+                    return this.computedCounter += 5;
+                }
+            },
+
+            methods: {
+                changeTitle : function(event){
+                    this.title = event.target.value;
+                },
+                getTitle : function(){
+                    console.log("Get Title");
+                    //this.title = "Hello tarini";
+                    return this.title;
+                },
+                getLink : function(){
+                    return this.link;
+                },
+                increaseCount: function(step){
+                    this.count+= step;
+                },
+                updateCoordinate: function(event){
+                    this.X = event.clientX;
+                    this.Y = event.clientY;
+                },
+                alertText: function(event){
+                    alert(event.target.value);
+                },
+                nonComputed : function(){
+                    console.log("Non Computed");
+                    return this.nonComputedCounter += 3;
+                }
+            }
+
+            
+        });
+    </script>
+
+</body>
+
+</html>
