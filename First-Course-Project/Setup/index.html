@@ -5,7 +5,6 @@
     <title>Monster Slayer</title>
     <!--<script src="https://npmcdn.com/vue/dist/vue.js"></script>-->
     <script src="vue.js"></script>
-    <script src="vue.js"></script>
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" href="css/app.css">
 </head>
@@ -47,16 +46,18 @@
         </div>
     </section>
    
-    <section class="row log">
+    <section class="row log" v-if="turns.length > 0">
         <div class="small-12 columns">
             <ul>
-                <li>
-
+                <li v-for="turn in turns"
+                  :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer}">
+                    {{turn.text}}
                 </li>
             </ul>
         </div>
     </section>
 </div>
 <script src="app.js"></script>
+
 </body>
 </html>
