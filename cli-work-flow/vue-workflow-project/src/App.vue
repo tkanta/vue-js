@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <app-server></app-server>
+    <!--<img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -16,6 +17,8 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+    <my-comp></my-comp>
+    <my-local-comp></my-local-comp>-->
   </div>
 </template>
 
@@ -26,8 +29,36 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  }
+    }
 }
+  // ---------- Global component ----------------
+  import Vue from 'vue'
+  Vue.component('my-comp', {
+    data: function(){
+      return {
+        status: 'Critical'
+      }
+    },
+    template: '<p> Server status : {{status}}'
+  });
+
+  //---------------local component ------------
+  var comp = {
+    data: function(){
+      return {
+        status: 'Critical'
+      }
+    },
+    template: '<p> Local Server status : {{status}}'
+  }
+
+  // --------------- new Vue instance -------------
+  new Vue({
+    el: "#app",
+    components: {
+      'my-local-comp': comp
+    }
+  });
 </script>
 
 <style lang="scss">
