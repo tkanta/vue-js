@@ -5,7 +5,11 @@
                 <h1>Routing</h1>
                 <hr>
                 <header-component></header-component>
-                <router-view></router-view>
+                </transition name="slide" mode="out-in">
+                    <router-view></router-view>
+                </transition>
+
+                
             </div>
         </div>
     </div>
