@@ -9,6 +9,9 @@
                 <hr>
                 <!-- <app-counter @updated="counter += $event"></app-counter> -->
                 <app-counter></app-counter>
+                <app-another-counter></app-another-counter>
+                <input type="text" v-model="value"/>
+                <p>{{value}}</p>
             </div>
         </div>
     </div>
@@ -18,8 +21,20 @@
     import Counter from './components/Counter.vue';
     import Result from './components/Result.vue';
     import AnotherResult from './components/AnotherResult.vue'
+    import AnotherCounter from './components/AnotherCounter.vue'
 
     export default {
+        computed: {
+            value : {
+                get(){
+                    return this.$store.getters.getValue;
+                },
+                set(value){
+                    return this.$store.dispatch('updateValueAction', value);
+                }
+                
+            }
+        },
         /*data() {
             return {
                 counter: 0
@@ -28,7 +43,8 @@
         components: {
             appCounter: Counter,
             appResult: Result,
-            appAnotherResult: AnotherResult
+            appAnotherResult: AnotherResult,
+            appAnotherCounter: AnotherCounter
         }
     }
 </script>

@@ -4,12 +4,20 @@
 
 <script>
     import {mapGetters} from 'vuex';
+    import * as types from '../store/types';
 
     export default {
+        computed: {
+            ...mapGetters({
+            doubleCounter: types.DOUBLE_COUNTER
+            })
+        }
         //props: ['counter']
-        computed: mapGetters([
+        
+        /*computed: mapGetters([
             'doubleCounter'
-        ])
+        ])*/
+
          /*{
 
            counter() {
