@@ -3,8 +3,8 @@
     <h1>That's the dashboard!</h1>
     <p>You should only get here if you're authenticated!</p>
     <hr>
-    <p>your email id : {{email}}</p>
-    <p>your country is : {{country}}</p>
+    <p v-if="email">your email id : {{ email}}</p>
+    <p v-if="country">your country is : {{country}}</p>
   </div>
 </template>
 
@@ -12,7 +12,18 @@
 import axios  from 'axios';
 
 export default {
-    data(){
+    computed :{
+       email () {
+          return !this.$store.getters.getUser ? false : this.$store.getters.getUser.email
+       },
+       country(){
+         return !this.$store.getters.getUser ? false : this.$store.getters.getUser.country ;
+       }
+    },
+    created() {
+      this.$store.dispatch('fetchUser');
+    }
+    /*data(){
       return {
         email: '',
         country: ''
@@ -32,9 +43,9 @@ export default {
            this.country = users[0].country;
          }
       })
-      .catch(err => console.log(err));  
+      .catch(err => console.log(err)); 
 
-    }  
+    }  */ 
 }
 </script>
 
