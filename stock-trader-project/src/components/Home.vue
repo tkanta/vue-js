@@ -1,3 +1,20 @@
 <template>
-    <h1> The Home Component</h1>
+    <div>
+        <h1>Trade or view your portfolio</h1>
+        <h6>You may save or load your data</h6>
+        <h6>Click on 'EndDay' to begin a new day! </h6>
+        <hr>
+        <p>your total Fund value : {{funds | currency}}</p>
+    </div>
 </template>
+
+<script>
+export default {
+    computed:{
+        funds(){
+            return this.$store.getters.funds;
+        }
+    }
+}
+</script>
+

@@ -9,7 +9,7 @@ import Stock from './Stock.vue';
 
 export default {
 
-    data() {
+    /*data() {
         return {
             stocks: [
                 {id: 1, name: 'BMW', price: 100},
@@ -19,10 +19,15 @@ export default {
 
             ]
         }
-    },
+    },*/
 
     components: {
         appStock: Stock
+    },
+    computed: {
+        stocks(){
+            return this.$store.getters.stocks;
+        }
     }
 }
 </script>
