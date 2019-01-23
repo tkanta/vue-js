@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import {eventBus} from '../main';
+    import {eventBus} from '../eventbus';
     export default{
         data: function() {
             return {

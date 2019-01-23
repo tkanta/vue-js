@@ -10,12 +10,14 @@
     <hr>
       <div>
           <slot></slot>
+          <p>*****{{test}}</p>
       </div>
   </div>
 </template>
 
 <script>
 export default {
+    props: ['test'],
     data: function(){
         return {
             counter : 0

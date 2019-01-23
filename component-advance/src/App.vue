@@ -6,11 +6,11 @@
                 <button @click="selectedComponent = 'app-author' ">Author</button>
                 
                 <keep-alive>
-                    <component :is="selectedComponent"> 
-                    <h2 slot='title'>{{quoteTitle}}</h2>
-                    <h2 slot='author'>Author Biography</h2>
-                    <p>A wonderful day!!</p>
-                    <p>Good sun shine</p>
+                    <component :is="selectedComponent" :test="quoteTitle" @click.native="test"> 
+                        <h2 slot='title'>{{quoteTitle}}</h2>
+                        <h2 slot='author'>Author Biography</h2>
+                        <p>A wonderful day!!</p>
+                        <p>Good sun shine</p>
                     </component>
                 </keep-alive>
                 
@@ -40,6 +40,11 @@
             'app-quote' : Quote,
             'app-author': Author
 
+        },
+        methods: {
+            test(){
+                console.log("test");
+            }
         }
     }
 </script>

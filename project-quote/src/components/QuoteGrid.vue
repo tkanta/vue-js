@@ -10,6 +10,7 @@
             props: ['quotes'],
             methods: {
                 deleteQuote(index){
+                    console.log("********"+index);
                     this.$emit('delete-quote-event', index);
                 }
             },
