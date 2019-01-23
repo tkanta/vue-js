@@ -15,15 +15,17 @@
       <strong class="nav navbar-text navbar-right">Total Funds : {{funds | currency}}</strong>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" @click="endDay">End Day</a></li>
-        <li class="dropdown">
+        <li class="dropdown" :class="{open: isDropDownOpen}"
+                    @click="isDropDownOpen = !isDropDownOpen">
           <a href="#" class="dropdown-toggle" 
                     data-toggle="dropdown" 
                     role="button" 
                     aria-haspopup="true" 
-                    aria-expanded="false">Save & Load<span class="caret"></span></a>
+                    aria-expanded="false"
+                    >Save & Load<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Save Data</a></li>
-            <li><a href="#">Load Data</a></li>
+            <li><a href="#" @click="saveData">Save Data</a></li>
+            <li><a href="#" @click="loadData">Load Data</a></li>
           </ul>
         </li>
       </ul>
@@ -35,7 +37,14 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+   data(){
+     return {
+       isDropDownOpen : false
+     }
+   },
    computed: {
      funds(){
        return this.$store.getters.funds;
@@ -44,6 +53,25 @@ export default {
    methods: {
      endDay(){
        this.$store.dispatch('randomStocks');
+     },
+
+     saveData(){
+       const data = {
+         funds: this.$store.getters.funds,
+         stocksPortfolio: this.$store.getters.stocksPortfolio,
+         stocks: this.$store.getters.stocks
+       };
+
+       axios.put('data.json', data)
+       .then(res => {
+         console.log("#### response #####")
+         console.log(res)
+       })
+       .catch(err => console.log(err));
+     },
+     //-------------- Load Data ------------
+     loadData(){
+          this.$store.dispatch('loadData');
      }
    }
 }
